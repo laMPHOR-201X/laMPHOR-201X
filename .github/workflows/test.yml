@@ -1,0 +1,19 @@
+name: Build and Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Go environment
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.19
+      - name: Install dependencies
+        run: go get -d ./...
+      - name: Run tests
+        run: go test -v ./...
+    success:
+      - name: Print success message
+        run: echo 'Build and test successful!'
